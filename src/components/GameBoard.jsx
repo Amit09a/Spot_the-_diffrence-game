@@ -3,8 +3,16 @@ import { useEffect, useState } from 'react';
 function GameBoard({ image1, image2, differences }) {
   const [found, setFound] = useState([]);
   const [completed, setCompleted] = useState(false);
+  const [time, setTime] = useState(0); // ⏱️ Track time in seconds
 
-  // Handle user click
+  useEffect(() => {
+    let timer;
+    if (!completed) {
+      timer = setInterval(() => setTime((prev) => prev + 1), 1000);
+    }
+    return () => clearInterval(timer);
+  }, [completed]);
+
   const handleClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const x = Math.round(e.clientX - rect.left);
@@ -27,20 +35,12 @@ function GameBoard({ image1, image2, differences }) {
     }
   };
 
-  // Check if game is completed
   useEffect(() => {
     if (found.length === differences.length) {
       setCompleted(true);
     }
   }, [found, differences]);
 
-  // Restart the game
-  const handleRestart = () => {
-    setFound([]);
-    setCompleted(false);
-  };
-
-  // Render found markers
   const renderMarkers = () =>
     found.map((box, idx) => (
       <div
@@ -50,25 +50,31 @@ function GameBoard({ image1, image2, differences }) {
           left: box.x,
           top: box.y,
           width: box.width,
-          height: box.height,
+          height: box.height
         }}
       ></div>
     ));
 
+  // Format time as MM:SS
+  const formatTime = (seconds) => {
+    const min = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, '0');
+    const sec = (seconds % 60).toString().padStart(2, '0');
+    return `${min}:${sec}`;
+  };
+
   return (
     <div className="game-wrapper">
       <h2>Click the differences on the right image!</h2>
-      <p>
-        Found: {found.length} / {differences.length}
-      </p>
+      <p>Found: {found.length} / {differences.length}</p>
+      <p>⏱️ Time: {formatTime(time)}</p>
 
       <div className="image-pair">
-        {/* Left Image */}
         <div className="image-container">
           <img src={image1} alt="Left" />
         </div>
 
-        {/* Right Image */}
         <div className="image-container" onClick={handleClick}>
           <img src={image2} alt="Right" />
           {renderMarkers()}
@@ -76,10 +82,9 @@ function GameBoard({ image1, image2, differences }) {
       </div>
 
       {completed && (
-        <>
-          <h3 className="success">🎉 You found all the differences!</h3>
-          <button onClick={handleRestart}>🔄 Restart Game</button>
-        </>
+        <h3 className="success">
+          🎉 You found all differences in {formatTime(time)}!
+        </h3>
       )}
     </div>
   );
