@@ -57,3 +57,7 @@ Coordinates of all differences (as bounding boxes)
 
 3.) These difference regions are saved in the same format as the JSON above and used to start the game.
 
+
+DEMO
+
+https://spot-the-diffrence-game.vercel.app/
