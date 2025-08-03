@@ -1,0 +1,180 @@
+/* === Base Styling === */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #242424;
+}
+
+/* === App Container === */
+.app {
+  max-width: 1000px;
+  width: 100%;
+  padding: 2rem;
+  background: #ffffff;
+  color: #000;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* === Typography === */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+h2, h3 {
+  margin-top: 1rem;
+}
+
+/* === Links === */
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+/* === Buttons === */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  color: #fff;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  margin: 1rem 0;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Light Mode Overrides */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+    color: #000;
+  }
+}
+
+/* === Mode Select === */
+.mode-select {
+  text-align: center;
+  padding-top: 2rem;
+}
+.mode-select button {
+  display: block;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+}
+
+/* === Config Screen === */
+.config-screen {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.config-screen input[type='text'] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.config-screen label {
+  font-weight: bold;
+  display: block;
+  margin-top: 1rem;
+}
+
+/* === Gameplay Layout === */
+.game-wrapper {
+  text-align: center;
+  padding: 1rem;
+}
+.image-pair {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* === Shared Image Container === */
+.image-container {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin: 1rem auto;
+}
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* === Marker Box (Used in Logger + Game) === */
+.marker {
+  position: absolute;
+  border: 2px dashed limegreen;
+  background-color: rgba(0, 255, 0, 0.1);
+  pointer-events: none;
+}
+.game-wrapper .marker {
+  border: 2px solid rgb(0, 255, 8);
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+/* === Logger Tool === */
+.logger-wrapper {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* === Completion Message === */
+.success {
+  color: green;
+  margin-top: 1rem;
+  font-weight: bold;
+}
